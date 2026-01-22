@@ -1,0 +1,80 @@
+import java.util.Scanner;
+public class DengueEscapeSimple {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("🦟 Dengue Escape Survival Game 🦟");
+        System.out.println("Survive for 10 days!");
+        System.out.print("enter Starting health:");
+        int health = sc.nextInt();
+        System.out.print("enter Having food:");
+        int food = sc.nextInt();
+        System.out.print("enter Repellent having:");
+        int repellent = sc.nextInt();
+        System.out.println("Starting Health: " + health);
+        System.out.println();
+        System.out.println("1. Stay Indoors");
+        System.out.println("2. Go Outside for Supplies");
+        System.out.println("3. Apply Repellent");
+        System.out.println("4. Rest");
+        System.out.println("5. Cook & Eat Food");
+        System.out.println("6. Help a Neighbor");
+        for (int day = 1; day <= 10; day++) {
+            System.out.println("Day " + day + " — Choose an action:");
+            System.out.print("Enter choice: ");
+            int choice = sc.nextInt();
+            if (choice == 1) {
+                health -= 10;
+                System.out.println("You stayed indoors. Lost 10 health.");
+            }
+            else if (choice == 2) {
+                health -= 15;
+                repellent++;
+                System.out.println("You went outside. Lost 15 health. Found 1 repellent.");
+            }
+            else if (choice == 3) {
+                if (repellent > 0) {
+                    repellent--;
+                    health += 5;
+                    System.out.println("Applied repellent. Gained 5 health.");
+                } else {
+                    System.out.println("No repellent left.");
+                }
+            }
+            else if (choice == 4) {
+                health += 10;
+                System.out.println("You rested. Gained 10 health.");
+            }
+            else if (choice == 5) {
+                if (food > 0) {
+                    food--;
+                    health += 20;
+                    System.out.println("Ate food. Gained 20 health.");
+                } else {
+                    System.out.println("No food to eat.");
+                }
+            }
+            else if (choice == 6) {
+                health -= 5;
+                food++;
+                System.out.println("Helped a neighbor. Lost 5 health, gained 1 food.");
+            }
+            else {
+                System.out.println("Invalid choice!");
+                day--;
+                continue;
+            }
+            if (health > 100)
+                health = 100;
+            if (health <= 0) {
+                System.out.println("\n You died. Game over.");
+                break;
+            }
+            System.out.println("Health: " + health + " | Food: " + food + " | Repellent: " + repellent);
+            System.out.println();
+        }
+        if (health > 0) {
+            System.out.println(" You survived 10 days! ");
+        }
+        sc.close();
+    }
+}
